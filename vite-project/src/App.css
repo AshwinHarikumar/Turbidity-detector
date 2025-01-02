@@ -43,6 +43,13 @@
 
 .camera-section {
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .camera-section button {
@@ -60,11 +67,70 @@
 
 .camera-section video {
   border: 2px solid #ddd;
-  border-radius: 4px;
+  border-radius: 8px;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 400px;
 }
 
 .camera-section p {
   margin-top: 1em;
   font-size: 1.2em;
   color: #333;
+}
+
+.app-header { /* New styles */
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.btn { /* New button styles */
+  border-radius: 5px;
+  border: none;
+  padding: 0.75em 1.5em;
+  font-size: 1em;
+  font-weight: 500;
+  margin: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.start-camera {
+  background-color: #4caf50;
+  color: white;
+}
+
+.start-camera:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.toggle-camera {
+  background-color: #2196f3;
+  color: white;
+}
+
+.toggle-camera:hover {
+  background-color: #1976d2;
+  transform: scale(1.05);
+}
+
+.capture-image {
+  background-color: #ff9800;
+  color: white;
+}
+
+.capture-image:hover {
+  background-color: #fb8c00;
+  transform: scale(1.05);
+}
+
+.info-text { /* New informational text styles */
+  margin-top: 1em;
+  font-size: 1.2em;
+  color: #555;
 }

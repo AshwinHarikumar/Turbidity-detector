@@ -5,6 +5,7 @@ function App() {
   const [turbidity, setTurbidity] = useState(null)
   const [ambientLight, setAmbientLight] = useState(null)
   const [location, setLocation] = useState({ latitude: null, longitude: null })
+  const [cameraType, setCameraType] = useState('environment') // New state
   const videoRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -38,8 +39,12 @@ function App() {
     }
   }, [])
 
+  const toggleCameraType = () => { // New function
+    setCameraType((prevType) => (prevType === 'environment' ? 'user' : 'environment'))
+  }
+
   const startCamera = () => {
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: cameraType } }) // Modified
       .then(stream => {
         videoRef.current.srcObject = stream
         videoRef.current.play()
@@ -72,15 +77,17 @@ function App() {
 
   return (
     <>
+      <header className="app-header">Turbidity Measurement App</header> {/* New header */}
       <div className="camera-section">
-        <button onClick={startCamera}>Start Camera</button>
-        <video ref={videoRef} width="300" height="225" />
-        <button onClick={captureImage}>Capture Image</button>
+        <button className="btn start-camera" onClick={startCamera}>Start Camera</button>
+        <button className="btn toggle-camera" onClick={toggleCameraType}>Switch Camera</button> {/* Updated button class */}
+        <video ref={videoRef} width="300" height="225" className="camera-video" /> {/* Added class */}
+        <button className="btn capture-image" onClick={captureImage}>Capture Image</button>
         <canvas ref={canvasRef} width="300" height="225" style={{ display: 'none' }} />
-        {turbidity && <p>Turbidity: {turbidity.toFixed(2)}</p>}
-        {ambientLight && <p>Ambient Light: {ambientLight} lx</p>}
+        {turbidity && <p className="info-text">Turbidity: {turbidity.toFixed(2)}</p>}
+        {ambientLight && <p className="info-text">Ambient Light: {ambientLight} lx</p>}
         {location.latitude && location.longitude && (
-          <p>Location: {location.latitude.toFixed(2)},{location.longitude.toFixed(2)}</p>
+          <p className="info-text">Location: {location.latitude.toFixed(2)},{location.longitude.toFixed(2)}</p>
         )}
       </div>
     </>
